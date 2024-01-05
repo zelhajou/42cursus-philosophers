@@ -3,6 +3,7 @@
 # Philosophers Project
 ## Description
 This project simulates a classic problem in computer science, *the dining philosophers problem*. It involves philosophers sitting at a table, doing one of three things: eating, thinking, or sleeping. While eating, they need two forks, which are shared with neighbors.
+
 *The Dining Philosophers problem* is a classic puzzle in computer science, often used to illustrate the challenges of resource allocation and synchronization in concurrent programming. At first glance, it might seem like a quirky thought experiment, but it mirrors real-world scenarios in computing quite closely
 
 <!--
