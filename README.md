@@ -24,12 +24,12 @@ Imagine a round table where five philosophers are seated, pondering the mysterie
 The catch is simple yet complex. If every philosopher simultaneously picks up the left fork, they all wait for the right fork indefinitely – a deadlock. This situation perfectly mimics real-world scenarios in computing where processes wait indefinitely for resources, leading to system freezes.
 
 ## Solutions
-Over the years, various solutions have been proposed:
+Several strategies have been proposed to solve this deadlock:
 
-1. **Semaphore:** Limit the number of philosophers that can attempt to pick up forks at the same time.
-2. **Resource Hierarchy:** Assign an order to resources (forks) and require that they be picked up in a specific sequence.
-3. **Waiter Approach:** Introduce a 'waiter' or a central authority to control when a philosopher can pick up forks.
-4. **Left-Handed Philosopher:** Make one philosopher different, who picks up the right fork first, breaking the symmetry.
+1. **Semaphore Solution:** Limit the number of philosophers that can try to pick up forks simultaneously. If we allow only four philosophers to reach for the forks at any time, at least one philosopher will be able to eat, preventing a deadlock.
+2. **Designate a Left-Handed Philosopher:** If one philosopher picks up the right fork first and then the left, it breaks the cycle of everyone reaching for the left fork simultaneously, preventing a deadlock.
+3. **The Waiter Approach:** Introduce a waiter who decides when a philosopher can pick up forks. The waiter ensures that not all forks are picked up at once, preventing a deadlock.
+4. **Resource Hierarchy:** Number the forks and always have the philosophers pick up the lower-numbered fork first and the higher-numbered fork next. This order prevents the circular wait condition.
 
 ## Why It Matters
 This problem is not just theoretical. It’s a practical tool used in computer science to understand issues like resource allocation, deadlock, and process synchronization. It's crucial for designing efficient, deadlock-free systems where multiple processes need to access shared resources.
