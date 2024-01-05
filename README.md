@@ -4,6 +4,10 @@
 ## Description
 This project simulates a classic problem in computer science, the dining philosophers problem. It involves philosophers sitting at a table, doing one of three things: eating, thinking, or sleeping. While eating, they need two forks, which are shared with neighbors.
 
+![MOSHED-2024-1-5-16-52-54](https://github.com/zelhajou/Philosophers/assets/39954629/d1660b4a-5adc-44e3-8177-0fffb4ef238a)
+
+
+
 ## How to Run
 Compile with `make` and run the program as follows:
 
