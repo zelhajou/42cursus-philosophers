@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:32 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/05 14:04:17 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:53:25 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_error_parse_msg(void)
 {
+	ft_putstr_fd("Error: Invalid number of arguments\n", 2);
 	ft_putstr_fd("Usage:\n./philo [number_of_philosophers] [time_to_die] ", 2);
 	ft_putstr_fd("[time_to_eat] [time_to_sleep] (optional)", 2);
 	ft_putstr_fd("[number_of_times_each_philosopher_must_eat]\n\n", 2);
