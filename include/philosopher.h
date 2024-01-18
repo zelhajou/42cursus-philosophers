@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/05 13:59:19 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:57:34 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ void	ft_putstr_fd(char *s, int fd);
 bool	ft_is_digit(char c);
 int		skip_space(int *i, const char *str);
 int		ft_atoi(const char *str);
-long	get_time(void);
+long	ft_get_time(void);
 void	ft_error_parse_msg(void);
 #endif

@@ -6,13 +6,13 @@
 #    By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/04 22:57:41 by zelhajou          #+#    #+#              #
-#    Updated: 2024/01/04 23:42:04 by zelhajou         ###   ########.fr        #
+#    Updated: 2024/01/17 15:48:57 by zelhajou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -fsanitize=thread
 OBJ_DIR = obj/
 SRC = src/main.c utils/libft.c utils/utils.c
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)

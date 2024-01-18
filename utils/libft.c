@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:49:19 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/05 14:01:09 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:57:48 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_atoi(const char *str)
 	return (sign * res);
 }
 
-long	get_time(void)
+long	ft_get_time(void)
 {
 	struct timeval	time;
 

@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:32 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/07 15:53:25 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:57:52 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	initialize_philosophers(t_philo *philo)
 		philo->philosophers[i].time_to_eat = philo->time_to_eat;
 		philo->philosophers[i].time_to_sleep = philo->time_to_sleep;
 		philo->philosophers[i].nb_must_eat = philo->nb_must_eat;
-		philo->philosophers[i].last_eat = get_time();
+		philo->philosophers[i].last_eat = ft_get_time();
 		philo->philosophers[i].forks = philo->nb_philo;
 		philo->philosophers[i].nb_philo = philo->nb_philo;
 		i++;
