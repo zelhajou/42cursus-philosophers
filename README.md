@@ -27,6 +27,7 @@ The issue arises when every philosopher picks up the fork on their left at the s
 ## The Challenge
 The catch is simple yet complex. If every philosopher simultaneously picks up the left fork, they all wait for the right fork indefinitely – a deadlock. This situation perfectly mimics real-world scenarios in computing where processes wait indefinitely for resources, leading to system freezes.
 
+<!--
 ## Solving the Problem
 Several strategies have been proposed to solve this deadlock:
 
@@ -34,7 +35,7 @@ Several strategies have been proposed to solve this deadlock:
 2. **Designate a Left-Handed Philosopher:** If one philosopher picks up the right fork first and then the left, it breaks the cycle of everyone reaching for the left fork simultaneously, preventing a deadlock.
 3. **The Waiter Approach:** Introduce a waiter who decides when a philosopher can pick up forks. The waiter ensures that not all forks are picked up at once, preventing a deadlock.
 4. **Resource Hierarchy:** Number the forks and always have the philosophers pick up the lower-numbered fork first and the higher-numbered fork next. This order prevents the circular wait condition.
-
+-->
 ## Why It Matters
 Understanding the Dining Philosophers problem is crucial in computer science because it teaches us about managing resources in multi-threaded or multi-process environments. It's not just about preventing deadlock but also ensuring fair access to resources and preventing starvation (where a process never gets the resources it needs).
 
@@ -54,3 +55,8 @@ The simulation is done using threads and mutexes. Each philosopher is a thread a
 - Argument validation
 - Philosopher activities simulation
 - Resource management to avoid deadlocks
+
+## Useful Links
+- [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
+- 
+
