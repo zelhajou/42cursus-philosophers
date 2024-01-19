@@ -496,5 +496,5 @@ int main() {
 
 ## Useful Links
 - [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
-- 
+- [Introduction To Threads (pthreads) ](https://youtu.be/ldJ8WGZVXZk)
 
