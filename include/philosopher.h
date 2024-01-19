@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/17 16:57:34 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/18 20:42:58 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@
 typedef struct s_philo
 {
 	int				id;
-	bool			is_eating;
-	bool			is_sleeping;
-	bool			is_thinking;
-	bool			is_dead;
 	int				nb_eat;
 	int				time_to_die;
 	int				time_to_eat;
@@ -41,6 +37,10 @@ typedef struct s_philo
 	long			last_eat;
 	int				forks;
 	int				nb_philo;
+	pthread_t		th_philo;
+	pthread_mutex_t	*mut;
+	long long 		time_start;
+
 	struct s_philo	*philosophers;
 }		t_philo;
 
@@ -53,6 +53,6 @@ void	ft_putstr_fd(char *s, int fd);
 bool	ft_is_digit(char c);
 int		skip_space(int *i, const char *str);
 int		ft_atoi(const char *str);
-long	ft_get_time(void);
+long long	ft_get_time(void);
 void	ft_error_parse_msg(void);
 #endif

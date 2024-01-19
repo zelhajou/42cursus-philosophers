@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:32 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/17 16:57:52 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:49:51 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ bool	initialize_philosophers(t_philo *philo)
 	while (i < philo->nb_philo)
 	{
 		philo->philosophers[i].id = i + 1;
-		philo->philosophers[i].is_eating = false;
-		philo->philosophers[i].is_sleeping = false;
-		philo->philosophers[i].is_thinking = false;
-		philo->philosophers[i].is_dead = false;
 		philo->philosophers[i].nb_eat = 0;
 		philo->philosophers[i].time_to_die = philo->time_to_die;
 		philo->philosophers[i].time_to_eat = philo->time_to_eat;
