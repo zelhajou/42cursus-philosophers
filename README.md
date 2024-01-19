@@ -56,6 +56,10 @@ The simulation is done using threads and mutexes. Each philosopher is a thread a
 - Philosopher activities simulation
 - Resource management to avoid deadlocks
 
+## External functions
+memset, printf, malloc, free, write, usleep, gettimeofday, pthread_create, pthread_detach, pthread_join, pthread_mutex_init, pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
+
+
 ## Useful Links
 - [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
 - 
