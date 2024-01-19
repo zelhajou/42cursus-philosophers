@@ -57,7 +57,108 @@ The simulation is done using threads and mutexes. Each philosopher is a thread a
 - Resource management to avoid deadlocks
 
 ## External functions
-memset, printf, malloc, free, write, usleep, gettimeofday, pthread_create, pthread_detach, pthread_join, pthread_mutex_init, pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
+
+<details>
+  <summary>
+    usleep()
+  </summary>
+A function is used to introduce a delay in the program for a specified number of microseconds (1 microsecond = 1 millionth of a second).
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    printf("This is before usleep()\n");
+
+    // Introducing a delay of 2 seconds (2000000 microseconds)
+    usleep(2000000);
+
+    printf("This is after usleep()\n");
+
+    return 0;
+}
+```
+</details>
+
+<details>
+  <summary>
+    gettimeofday()
+  </summary>
+A function is commonly used to get the current time, including microseconds. It takes a pointer to a struct timeval as an argument, and this structure holds the seconds and microseconds components of the current time.
+
+```c
+#include <stdio.h>
+#include <sys/time.h>
+
+int main() {
+    // Declare a struct timeval to store the result
+    struct timeval current_time;
+
+    // Get the current time
+    gettimeofday(&current_time, NULL);
+
+    // Display the current time in seconds and microseconds
+    printf("Seconds: %ld\n", current_time.tv_sec);
+    printf("Microseconds: %ld\n", current_time.tv_usec);
+
+    return 0;
+}
+```
+</details>
+
+<details>
+  <summary>
+    pthread_create()
+  </summary>
+A function is used to create a new thread. Threads allow a program to execute multiple tasks concurrently, providing a way to improve performance by parallelizing operations.
+
+```c
+#include <pthread.h>
+
+int pthread_create(pthread_t *restrict thread, const pthread_attr_t *restrict attr, void *(*start_routine)(void *), void *restrict arg);
+```
+
+1. A pointer to a pthread_t variable, which will be used to identify the newly created thread.
+2. A pointer to a pthread_attr_t structure specifying thread attributes. You can typically set it to NULL for default attributes.
+3. A pointer to the function that will be executed by the new thread.
+4. A void pointer that is passed as an argument to the function specified in parameter 3.
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+
+// Function to be executed by the new thread
+void *threadFunction(void *arg) {
+    printf("This is the new thread.\n");
+    return NULL;
+}
+
+int main() {
+    pthread_t newThread; // Thread identifier
+    int threadCreationStatus;
+
+    // Create a new thread
+    threadCreationStatus = pthread_create(&newThread, NULL, threadFunction, NULL);
+
+    if (threadCreationStatus != 0) {
+        fprintf(stderr, "Error creating thread: %d\n", threadCreationStatus);
+        return 1;
+    }
+
+    printf("This is the main thread.\n");
+
+    // Wait for the new thread to finish (optional)
+    pthread_join(newThread, NULL);
+
+    return 0;
+}
+```
+
+</details>
+
+
+memset, printf, malloc, free, write, pthread_create, pthread_detach, pthread_join, pthread_mutex_init, pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
 
 
 ## Useful Links
