@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:32 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/18 22:49:51 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/19 21:37:27 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,33 +50,54 @@ bool	parse_arguments(int argc, char **argv, t_philo *philo)
 	return (true);
 }
 
-bool	initialize_philosophers(t_philo *philo)
+t_philo	*initialize_philosophers(t_philo *philo)
 {
+	t_philo *ph;
+	pthread_mutex_t *forks;
 	int	i;
+	long long *tab;
 
 	i = 0;
-	philo->philosophers = malloc(sizeof(t_philo) * philo->nb_philo);
-	if (!philo->philosophers)
-		return (false);
+	ph = malloc(sizeof(t_philo) * philo->nb_philo);
+	if (!ph)
+		return (NULL);
+	forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * philo->nb_philo);
+	if (!forks)
+		return (NULL);
 	while (i < philo->nb_philo)
 	{
-		philo->philosophers[i].id = i + 1;
-		philo->philosophers[i].nb_eat = 0;
-		philo->philosophers[i].time_to_die = philo->time_to_die;
-		philo->philosophers[i].time_to_eat = philo->time_to_eat;
-		philo->philosophers[i].time_to_sleep = philo->time_to_sleep;
-		philo->philosophers[i].nb_must_eat = philo->nb_must_eat;
-		philo->philosophers[i].last_eat = ft_get_time();
-		philo->philosophers[i].forks = philo->nb_philo;
-		philo->philosophers[i].nb_philo = philo->nb_philo;
+		pthread_mutex_init(&forks[i], NULL);
 		i++;
 	}
-	return (true);
+	tab = malloc(sizeof(long long) * philo->nb_philo);
+	if (!tab)
+		return (NULL);
+	i = -1;
+	while (++i < philo->nb_philo)
+		tab[i] = ft_get_time();
+	i = 0;
+	while (i < philo->nb_philo)
+	{
+		ph[i].id = i + 1;
+		ph[i].nb_eat = 0;
+		ph[i].time_to_die = philo->time_to_die;
+		ph[i].time_to_eat = philo->time_to_eat;
+		ph[i].time_to_sleep = philo->time_to_sleep;
+		ph[i].nb_must_eat = philo->nb_must_eat;
+		ph[i].last_eat = tab;
+		ph[i].forks = philo->nb_philo;
+		ph[i].nb_philo = philo->nb_philo;
+		ph[i].mut = forks;
+		i++;
+	}
+	free(philo);
+	return (ph);
 }
 
-bool	initialize_simulation(int argc, char **argv, t_philo **philosophers)
+t_philo	*initialize_simulation(int argc, char **argv, t_philo **philosophers)
 {
 	*philosophers = malloc(sizeof(t_philo));
+	t_philo *ph;
 	if (!*philosophers)
 		return (false);
 	if (!parse_arguments(argc, argv, *philosophers))
@@ -84,10 +105,11 @@ bool	initialize_simulation(int argc, char **argv, t_philo **philosophers)
 		free(*philosophers);
 		exit(1);
 	}
-	if (!initialize_philosophers(*philosophers))
+	ph = initialize_philosophers(*philosophers);
+	if (!ph)
 	{
 		free(*philosophers);
-		return (false);
+		return (NULL);
 	}
-	return (true);
+	return (ph);
 }

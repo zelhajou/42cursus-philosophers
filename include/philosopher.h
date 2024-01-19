@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/18 20:42:58 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/19 21:28:47 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ typedef struct s_philo
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_must_eat;
-	long			last_eat;
+	long long		*last_eat;
 	int				forks;
 	int				nb_philo;
 	pthread_t		th_philo;
 	pthread_mutex_t	*mut;
-	long long 		time_start;
-
-	struct s_philo	*philosophers;
+	pthread_mutex_t protect;
+	long long time_start;
 }		t_philo;
 
+
 bool	parse_arguments(int argc, char **argv, t_philo *philo);
-bool	initialize_philosophers(t_philo *philosophers);
-bool	initialize_simulation(int argc, char **argv, t_philo **philosophers);
+t_philo	*initialize_philosophers(t_philo *philosophers);
+t_philo	*initialize_simulation(int argc, char **argv, t_philo **philosophers);
 
 // utils
 void	ft_putstr_fd(char *s, int fd);

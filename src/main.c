@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:29 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/18 23:08:18 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/19 22:46:49 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,31 @@
 
 void is_eating(t_philo *philo)
 {
-	pthread_mutex_lock(philo->mut);
+	pthread_mutex_lock(&philo->mut[philo->id - 1]);
+	printf(" Time %lld: philo Id : %d take a fork ...\n", ft_get_time() - philo->time_start, philo->id);
 	if (philo->id == 1)
-		pthread_mutex_lock(philo->philosophers[philo->nb_philo - 1].mut);
+	{
+		pthread_mutex_lock(&philo->mut[philo->nb_philo - 1]);
+		printf(" Time %lld: philo Id : %d take a fork ...\n", ft_get_time() - philo->time_start, philo->id);
+	}
 	else
-		pthread_mutex_lock(philo->philosophers[philo->id - 1].mut);
-	printf(" Time : %lld philo Id : %d is eating ...\n", ft_get_time() - philo->time_start, philo->id);
+	{
+		pthread_mutex_lock(&philo->mut[philo->id - 2]);
+		printf(" Time %lld: philo Id : %d take a fork ...\n", ft_get_time() - philo->time_start, philo->id);
+	}
+	printf(" Time %lld: philo Id : %d is eating ...\n", ft_get_time() - philo->time_start, philo->id);
+	philo->last_eat[philo->id - 1] = ft_get_time();
 	usleep(philo->time_to_eat * 1000);
-	
 	return;
 }
 
-
 void is_sleeping(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->mut);
+	pthread_mutex_unlock(&philo->mut[philo->id - 1]);
 	if (philo->id == 1)
-		pthread_mutex_unlock(philo->philosophers[philo->nb_philo - 1].mut);
+		pthread_mutex_unlock(&philo->mut[philo->nb_philo - 1]);
 	else
-		pthread_mutex_unlock(philo->philosophers[philo->id - 1].mut);
+		pthread_mutex_unlock(&philo->mut[philo->id - 2]);
 	printf(" Time : %lld philo Id : %d is sleeping ...\n", ft_get_time() - philo->time_start, philo->id);
 	usleep(philo->time_to_eat * 1000);
 	printf("is thinking ...");
@@ -42,57 +48,83 @@ void is_sleeping(t_philo *philo)
 void *routine(void *param)
 {
 	t_philo *philo = (t_philo *)param;
+	printf("philo %d\n", philo->id);
 
 	if (philo->id % 2 == 0)
 		usleep(100);
+
 	while (1)
 	{
 		is_eating(philo);
-		// is_sleeping(philo);
+		is_sleeping(philo);
 	}
+}
+
+t_philo *death_init(t_philo *philo, t_philo *death)
+{
+	death = malloc(sizeof(t_philo));
+	if (!death)
+		return (NULL);
+	death->id = 0;
+	death->nb_eat = 0;
+	death->time_to_die = philo->time_to_die;
+	death->time_to_eat = philo->time_to_eat;
+	death->time_to_sleep = philo->time_to_sleep;
+	death->nb_must_eat = philo->nb_must_eat;
+	death->last_eat = philo->last_eat;
+	death->forks = philo->nb_philo;
+	death->nb_philo = philo->nb_philo;
+	death->mut = NULL;
+	pthread_mutex_init(&death->protect, NULL);
+	return (death);
+}
+
+void	*check_death(void *param)
+{
+	t_philo *death;
+	int i;
+
+	death = (t_philo *)param;
+	i = 0;
+	usleep(1000);
+	while (i < death->nb_philo)
+	{
+		if (ft_get_time() - death->last_eat[i] >= death->time_to_die)
+		{
+			pthread_mutex_lock(&death->protect);
+			printf("mat %d\n", i+1);
+			return (NULL);
+		}
+		if (i + 1 <= death->nb_philo)
+			i = -1;
+		i++;
+	}
+	return (NULL);
 }
 
 int	main(int argc, char **argv)
 {
 	int		i;
 	t_philo	*philo;
+	t_philo *death;
 
 	i = 0;
-	if (!initialize_simulation(argc, argv, &philo))
+	philo = initialize_simulation(argc, argv, &philo);
+	if (!philo)
 	{
 		ft_putstr_fd("Simulation initialization failed.\n", 2);
 		return (1);
 	}
+	death = death_init(philo, death);
+	death->time_start = ft_get_time();
 	while (i < philo->nb_philo)
 	{
-	
-		philo->philosophers[i].mut = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-		pthread_mutex_init(philo->philosophers[i].mut, NULL);
+		philo[i].time_start = death->time_start;
+		pthread_create(&philo[i].th_philo, NULL, routine, &philo[i]);
+		pthread_detach(philo[i].th_philo);
 		i++;
 	}
-
-	i = 0;
-
-	long long time =  ft_get_time();
-
-	while (i < philo->nb_philo)
-	{
-		philo->philosophers[i].time_start = time;
-		pthread_create(&philo->philosophers[i].th_philo, NULL, routine, &philo->philosophers[i]);
-		pthread_detach(philo->philosophers[i].th_philo);
-		i++;
-	}
-
-	// while (i < (philo->nb_philo))
-	// {
-	// 	printf("Philosopher %d:\n", i + 1);
-	// 	printf("Time to Die: %d\n", philo->philosophers[i].time_to_die);
-	// 	printf("Time to Eat: %d\n", philo->philosophers[i].time_to_eat);
-	// 	printf("Time to Sleep: %d\n", philo->philosophers[i].time_to_sleep);
-	// 	printf("Number of Times Must Eat: %d\n", philo->philosophers[i].nb_must_eat);
-	// 	printf("Last Eat Time: %ld\n", philo->philosophers[i].last_eat);
-	// 	printf("Forks: %d\n", philo->philosophers[i].forks);
-	// 	i++;
-	// }
+	pthread_create(&death->th_philo, NULL, check_death, death);
+	pthread_join(death->th_philo, NULL);
 	return (0);
 }
