@@ -27,6 +27,7 @@ The issue arises when every philosopher picks up the fork on their left at the s
 ## The Challenge
 The catch is simple yet complex. If every philosopher simultaneously picks up the left fork, they all wait for the right fork indefinitely – a deadlock. This situation perfectly mimics real-world scenarios in computing where processes wait indefinitely for resources, leading to system freezes.
 
+<!--
 ## Solving the Problem
 Several strategies have been proposed to solve this deadlock:
 
@@ -34,7 +35,7 @@ Several strategies have been proposed to solve this deadlock:
 2. **Designate a Left-Handed Philosopher:** If one philosopher picks up the right fork first and then the left, it breaks the cycle of everyone reaching for the left fork simultaneously, preventing a deadlock.
 3. **The Waiter Approach:** Introduce a waiter who decides when a philosopher can pick up forks. The waiter ensures that not all forks are picked up at once, preventing a deadlock.
 4. **Resource Hierarchy:** Number the forks and always have the philosophers pick up the lower-numbered fork first and the higher-numbered fork next. This order prevents the circular wait condition.
-
+-->
 ## Why It Matters
 Understanding the Dining Philosophers problem is crucial in computer science because it teaches us about managing resources in multi-threaded or multi-process environments. It's not just about preventing deadlock but also ensuring fair access to resources and preventing starvation (where a process never gets the resources it needs).
 
@@ -54,3 +55,446 @@ The simulation is done using threads and mutexes. Each philosopher is a thread a
 - Argument validation
 - Philosopher activities simulation
 - Resource management to avoid deadlocks
+
+## External functions
+
+<details>
+  <summary>
+    <code>usleep()</code>
+  </summary>
+A function is used to introduce a delay in the program for a specified number of microseconds (1 microsecond = 1 millionth of a second).
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    printf("This is before usleep()\n");
+
+    // Introducing a delay of 2 seconds (2000000 microseconds)
+    usleep(2000000);
+
+    printf("This is after usleep()\n");
+
+    return 0;
+}
+```
+</details>
+
+<details>
+  <summary>
+    <code>gettimeofday()</code>
+  </summary>
+A function is commonly used to get the current time, including microseconds. It takes a pointer to a struct timeval as an argument, and this structure holds the seconds and microseconds components of the current time.
+
+```c
+#include <stdio.h>
+#include <sys/time.h>
+
+int main() {
+    // Declare a struct timeval to store the result
+    struct timeval current_time;
+
+    // Get the current time
+    gettimeofday(&current_time, NULL);
+
+    // Display the current time in seconds and microseconds
+    printf("Seconds: %ld\n", current_time.tv_sec);
+    printf("Microseconds: %ld\n", current_time.tv_usec);
+
+    return 0;
+}
+```
+</details>
+
+<details>
+  <summary>
+    <code>pthread_create()</code>
+  </summary>
+A function is used to create a new thread. Threads allow a program to execute multiple tasks concurrently, providing a way to improve performance by parallelizing operations.
+
+```c
+#include <pthread.h>
+
+int pthread_create(pthread_t *restrict thread, const pthread_attr_t *restrict attr, void *(*start_routine)(void *), void *restrict arg);
+```
+
+1. A pointer to a pthread_t variable, which will be used to identify the newly created thread.
+2. A pointer to a pthread_attr_t structure specifying thread attributes. You can typically set it to NULL for default attributes.
+3. A pointer to the function that will be executed by the new thread.
+4. A void pointer that is passed as an argument to the function specified in parameter 3.
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+
+// Function to be executed by the new thread
+void *threadFunction(void *arg) {
+    printf("This is the new thread.\n");
+    return NULL;
+}
+
+int main() {
+    pthread_t newThread; // Thread identifier
+    int threadCreationStatus;
+
+    // Create a new thread
+    threadCreationStatus = pthread_create(&newThread, NULL, threadFunction, NULL);
+
+    if (threadCreationStatus != 0) {
+        fprintf(stderr, "Error creating thread: %d\n", threadCreationStatus);
+        return 1;
+    }
+
+    printf("This is the main thread.\n");
+
+    // Wait for the new thread to finish (optional)
+    pthread_join(newThread, NULL);
+
+    return 0;
+}
+```
+
+</details>
+
+<details>
+  <summary>
+    <code>pthread_join()</code>
+  </summary>
+A function used to make a calling thread wait until the specified thread terminates. It allows the calling thread to synchronize its execution with the completion of another thread.
+
+1. The `pthread_t` variable representing the thread to be joined.
+2. A pointer to a location where the exit status of the joined thread will be stored.
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+
+void *threadFunction(void *arg) {
+    printf("This is the new thread.\n");
+    return (void *)42;
+}
+
+int main() {
+    pthread_t newThread; // Thread identifier
+    int threadCreationStatus;
+
+    // Create a new thread
+    threadCreationStatus = pthread_create(&newThread, NULL, threadFunction, NULL);
+
+    if (threadCreationStatus != 0) {
+        fprintf(stderr, "Error creating thread: %d\n", threadCreationStatus);
+        return 1;
+    }
+
+    printf("This is the main thread.\n");
+
+    // Wait for the new thread to finish and retrieve its exit status
+    void *threadExitStatus;
+    pthread_join(newThread, &threadExitStatus);
+
+    printf("The new thread has finished with exit status: %ld\n", (long)threadExitStatus);
+
+    return 0;
+}
+```
+</details>
+
+<details>
+  <summary>
+    <code>pthread_detach()</code>
+  </summary>
+A function  used to mark a thread as detached. A detached thread automatically releases its resources when it exits, without requiring the main thread to join and wait for its completion. 
+
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+
+void *threadFunction(void *arg) {
+    printf("This is the detached thread.\n");
+    // Simulate some work in the thread
+    sleep(2);
+    printf("The detached thread is done.\n");
+    // No need to explicitly call pthread_exit() in a detached thread
+    return NULL;
+}
+
+int main() {
+    pthread_t detachedThread; // Thread identifier
+    int threadCreationStatus;
+
+    // Create a detached thread
+    threadCreationStatus = pthread_create(&detachedThread, NULL, threadFunction, NULL);
+
+    if (threadCreationStatus != 0) {
+        fprintf(stderr, "Error creating thread: %d\n", threadCreationStatus);
+        return 1;
+    }
+
+    // Detach the thread
+    threadCreationStatus = pthread_detach(detachedThread);
+
+    if (threadCreationStatus != 0) {
+        fprintf(stderr, "Error detaching thread: %d\n", threadCreationStatus);
+        return 1;
+    }
+
+    printf("This is the main thread.\n");
+
+    // Main thread continues its execution without waiting for the detached thread
+
+    // Note: The detached thread cleans up its resources automatically upon termination
+
+    return 0;
+}
+```
+</details>
+
+<details>
+  <summary>
+    <code>pthread_mutex_init()</code>
+  </summary>
+A function used to initialize a mutex, which is a synchronization primitive used to protect shared resources from concurrent access by multiple threads.
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+
+// Shared data protected by the mutex
+int sharedData = 0;
+
+// Mutex declaration
+pthread_mutex_t myMutex;
+
+void *threadFunction(void *arg) {
+    // Lock the mutex before accessing the shared data
+    pthread_mutex_lock(&myMutex);
+
+    // Critical section: Access and modify the shared data
+    printf("Thread %ld is modifying the shared data.\n", (long)arg);
+    sharedData++;
+    printf("Thread %ld has finished modifying the shared data.\n", (long)arg);
+
+    // Unlock the mutex after finishing the critical section
+    pthread_mutex_unlock(&myMutex);
+
+    return NULL;
+}
+
+int main() {
+    // Initialize the mutex
+    if (pthread_mutex_init(&myMutex, NULL) != 0) {
+        fprintf(stderr, "Error initializing mutex.\n");
+        return 1;
+    }
+
+    pthread_t thread1, thread2;
+
+    // Create two threads
+    pthread_create(&thread1, NULL, threadFunction, (void *)1);
+    pthread_create(&thread2, NULL, threadFunction, (void *)2);
+
+    // Wait for the threads to finish
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+
+    // Destroy the mutex after its use is done
+    pthread_mutex_destroy(&myMutex);
+
+    printf("Final value of sharedData: %d\n", sharedData);
+
+    return 0;
+}
+```
+</details>
+
+<details>
+  <summary>
+    <code>pthread_mutex_destroy()</code>
+  </summary>
+function used to destroy a previously initialized mutex. After a mutex has been successfully destroyed, it cannot be used again unless it is reinitialized using pthread_mutex_init()
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+
+// Shared data protected by the mutex
+int sharedData = 0;
+
+// Mutex declaration
+pthread_mutex_t myMutex;
+
+void *threadFunction(void *arg) {
+    // Lock the mutex before accessing the shared data
+    pthread_mutex_lock(&myMutex);
+
+    // Critical section: Access and modify the shared data
+    printf("Thread %ld is modifying the shared data.\n", (long)arg);
+    sharedData++;
+    printf("Thread %ld has finished modifying the shared data.\n", (long)arg);
+
+    // Unlock the mutex after finishing the critical section
+    pthread_mutex_unlock(&myMutex);
+
+    return NULL;
+}
+
+int main() {
+    // Initialize the mutex
+    if (pthread_mutex_init(&myMutex, NULL) != 0) {
+        fprintf(stderr, "Error initializing mutex.\n");
+        return 1;
+    }
+
+    pthread_t thread1, thread2;
+
+    // Create two threads
+    pthread_create(&thread1, NULL, threadFunction, (void *)1);
+    pthread_create(&thread2, NULL, threadFunction, (void *)2);
+
+    // Wait for the threads to finish
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+
+    // Destroy the mutex after its use is done
+    if (pthread_mutex_destroy(&myMutex) != 0) {
+        fprintf(stderr, "Error destroying mutex.\n");
+        return 1;
+    }
+
+    printf("Final value of sharedData: %d\n", sharedData);
+
+    return 0;
+}
+```
+</details>
+
+<details>
+  <summary>
+    <code>pthread_mutex_lock()</code>
+  </summary>
+function used to lock a mutex, providing exclusive access to a critical section of code for the calling thread. If the mutex is already locked by another thread, the calling thread will block until the mutex becomes available
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+
+// Shared data protected by the mutex
+int sharedData = 0;
+
+// Mutex declaration
+pthread_mutex_t myMutex;
+
+void *threadFunction(void *arg) {
+    // Lock the mutex before accessing the shared data
+    pthread_mutex_lock(&myMutex);
+
+    // Critical section: Access and modify the shared data
+    printf("Thread %ld is modifying the shared data.\n", (long)arg);
+    sharedData++;
+    printf("Thread %ld has finished modifying the shared data.\n", (long)arg);
+
+    // Unlock the mutex after finishing the critical section
+    pthread_mutex_unlock(&myMutex);
+
+    return NULL;
+}
+
+int main() {
+    // Initialize the mutex
+    if (pthread_mutex_init(&myMutex, NULL) != 0) {
+        fprintf(stderr, "Error initializing mutex.\n");
+        return 1;
+    }
+
+    pthread_t thread1, thread2;
+
+    // Create two threads
+    pthread_create(&thread1, NULL, threadFunction, (void *)1);
+    pthread_create(&thread2, NULL, threadFunction, (void *)2);
+
+    // Wait for the threads to finish
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+
+    // Destroy the mutex after its use is done
+    if (pthread_mutex_destroy(&myMutex) != 0) {
+        fprintf(stderr, "Error destroying mutex.\n");
+        return 1;
+    }
+
+    printf("Final value of sharedData: %d\n", sharedData);
+
+    return 0;
+}
+```
+</details>
+
+<details>
+  <summary>
+    <code>pthread_mutex_unlock()</code>
+  </summary>
+ function in C is used to release the lock on a mutex that was previously acquired using pthread_mutex_lock(). It allows other threads to acquire the mutex and enter the critical section protected by that mutex.
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+
+// Shared data protected by the mutex
+int sharedData = 0;
+
+// Mutex declaration
+pthread_mutex_t myMutex;
+
+void *threadFunction(void *arg) {
+    // Lock the mutex before accessing the shared data
+    pthread_mutex_lock(&myMutex);
+
+    // Critical section: Access and modify the shared data
+    printf("Thread %ld is modifying the shared data.\n", (long)arg);
+    sharedData++;
+    printf("Thread %ld has finished modifying the shared data.\n", (long)arg);
+
+    // Unlock the mutex after finishing the critical section
+    pthread_mutex_unlock(&myMutex);
+
+    return NULL;
+}
+
+int main() {
+    // Initialize the mutex
+    if (pthread_mutex_init(&myMutex, NULL) != 0) {
+        fprintf(stderr, "Error initializing mutex.\n");
+        return 1;
+    }
+
+    pthread_t thread1, thread2;
+
+    // Create two threads
+    pthread_create(&thread1, NULL, threadFunction, (void *)1);
+    pthread_create(&thread2, NULL, threadFunction, (void *)2);
+
+    // Wait for the threads to finish
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+
+    // Destroy the mutex after its use is done
+    if (pthread_mutex_destroy(&myMutex) != 0) {
+        fprintf(stderr, "Error destroying mutex.\n");
+        return 1;
+    }
+
+    printf("Final value of sharedData: %d\n", sharedData);
+
+    return 0;
+}
+```
+</details>
+
+
+## Useful Links
+- [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
+- [Introduction To Threads (pthreads) ](https://youtu.be/ldJ8WGZVXZk)
+
