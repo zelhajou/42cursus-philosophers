@@ -493,6 +493,28 @@ int main() {
 ```
 </details>
 
+## Explination
+
+The concept of threads is fundamental to concurrent programming, allowing multiple tasks to execute concurrently within a single process
+
+> [!TIP]
+> Concurrent programming is an advanced programming technique that enables the execution of multiple tasks at the same time. It is a powerful approach for improving the performance and responsiveness of a program, particularly in systems with multiple processor units. In concurrent programming, individual tasks are known as threads or processes, which can run independently, share resources, and interact with each other.
+
+When working with concurrent programming, you need to understand the basic principles and concepts behind this technique. Some key principles include:
+
+1. **Concurrency**: Threads provide a way to achieve concurrency, enabling different parts of a program to execute independently.
+Concurrency is essential for improving the responsiveness of applications, particularly in scenarios where tasks can be performed simultaneously.
+
+2. **Parallelism**: Threads facilitate parallelism by allowing multiple threads to execute in parallel, taking advantage of multi-core processors.
+Parallelism can lead to better utilization of system resources and improved performance for certain types of tasks.
+
+![2](https://github.com/zelhajou/42-Philosophers/assets/39954629/15ceb9d8-e84a-4225-9a20-ffa4024df9ea)
+
+### Concurrency Meaning in Programming
+- **Processes and threads**: Concurrency is achieved by running multiple tasks in parallel, either as processes or threads. Processes are independent units of execution with their own memory space, while threads belong to a single process and share memory with other threads in that process.
+- **Interprocess communication (IPC)**: In concurrent programming, processes may need to exchange data and signals. IPC mechanisms, such as pipes, file-based communication, shared memory, and message-passing systems, facilitate this data exchange between processes.
+- **Deadlocks and livelocks**: In some cases, processes or threads become trapped in a state of waiting for access to resources or for other processes or threads to complete, leading to deadlocks and livelocks. These situations can cause the concurrent program to hang or slow down, so it is essential to detect and handle them effectively.
+
 
 ## Useful Links
 - [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
