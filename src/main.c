@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:29 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/19 22:46:49 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/20 10:40:31 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 void is_eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mut[philo->id - 1]);
-	printf(" Time %lld: philo Id : %d take a fork ...\n", ft_get_time() - philo->time_start, philo->id);
+	printf(Y " Time %lld: philo Id : %d take a fork ...\n" RST, ft_get_time() - philo->time_start, philo->id);
 	if (philo->id == 1)
 	{
 		pthread_mutex_lock(&philo->mut[philo->nb_philo - 1]);
-		printf(" Time %lld: philo Id : %d take a fork ...\n", ft_get_time() - philo->time_start, philo->id);
+		printf(Y " Time %lld: philo Id : %d take a fork ...\n" RST, ft_get_time() - philo->time_start, philo->id );
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->mut[philo->id - 2]);
-		printf(" Time %lld: philo Id : %d take a fork ...\n", ft_get_time() - philo->time_start, philo->id);
+		printf(Y " Time %lld: philo Id : %d take a fork ...\n" RST, ft_get_time() - philo->time_start, philo->id);
 	}
-	printf(" Time %lld: philo Id : %d is eating ...\n", ft_get_time() - philo->time_start, philo->id);
+	printf(G " Time %lld: philo Id : %d is eating ...\n" RST, ft_get_time() - philo->time_start, philo->id);
 	philo->last_eat[philo->id - 1] = ft_get_time();
 	usleep(philo->time_to_eat * 1000);
 	return;
@@ -39,9 +39,9 @@ void is_sleeping(t_philo *philo)
 		pthread_mutex_unlock(&philo->mut[philo->nb_philo - 1]);
 	else
 		pthread_mutex_unlock(&philo->mut[philo->id - 2]);
-	printf(" Time : %lld philo Id : %d is sleeping ...\n", ft_get_time() - philo->time_start, philo->id);
+	printf(W " Time : %lld philo Id : %d is sleeping ...\n" RST, ft_get_time() - philo->time_start, philo->id);
 	usleep(philo->time_to_eat * 1000);
-	printf("is thinking ...");
+	printf(C "is thinking ...\n" RST);
 	return;
 }
 
@@ -92,7 +92,7 @@ void	*check_death(void *param)
 		if (ft_get_time() - death->last_eat[i] >= death->time_to_die)
 		{
 			pthread_mutex_lock(&death->protect);
-			printf("mat %d\n", i+1);
+			printf(R "is Dead %d\n" RST, i+1);
 			return (NULL);
 		}
 		if (i + 1 <= death->nb_philo)
