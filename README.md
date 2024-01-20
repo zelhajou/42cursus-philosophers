@@ -508,7 +508,25 @@ Concurrency is essential for improving the responsiveness of applications, parti
 2. **Parallelism**: Threads facilitate parallelism by allowing multiple threads to execute in parallel, taking advantage of multi-core processors.
 Parallelism can lead to better utilization of system resources and improved performance for certain types of tasks.
 
-![2](https://github.com/zelhajou/42-Philosophers/assets/39954629/15ceb9d8-e84a-4225-9a20-ffa4024df9ea)
+3. **Responsiveness**: Threads are often used in graphical user interfaces and interactive applications to maintain responsiveness. For example, a background thread might handle file I/O or network requests, allowing the main thread to remain responsive to user input.
+
+4. **Resource Sharing**:
+   - Threads within a process share the same resources, such as memory space, file descriptors, and other process-related attributes.
+   - While sharing resources enables efficient communication between threads, it also introduces challenges related to synchronization and avoiding data corruption.
+
+5. **Synchronization**:
+   - Synchronization mechanisms, such as mutexes, semaphores, and condition variables, are crucial for managing shared resources and avoiding race conditions.
+   - Proper synchronization ensures that threads can safely access and modify shared data without conflicts.
+
+6. **Thread Safety**:
+   - Thread safety refers to the ability of a program to function correctly in a multithreaded environment.
+   - Thread-safe code ensures that shared resources are accessed and modified in a way that avoids data corruption and unexpected behavior.
+
+7. **Multithreading Challenges**: Multithreading introduces challenges such as deadlocks (circular dependencies on resources), race conditions (unpredictable outcomes due to interleaved execution), and priority inversion (lower-priority threads delaying higher-priority threads).
+
+8. **Scalability**:
+   - Threads provide a way to achieve scalability in applications by distributing work among multiple threads.
+   - Scalability is important for handling increased workloads and taking advantage of modern, multi-core processors.
 
 ### Concurrency Meaning in Programming
 - **Processes and threads**: Concurrency is achieved by running multiple tasks in parallel, either as processes or threads. Processes are independent units of execution with their own memory space, while threads belong to a single process and share memory with other threads in that process.
@@ -517,6 +535,8 @@ Parallelism can lead to better utilization of system resources and improved perf
 
 
 ## Useful Links
+- https://www.scaler.com/topics/cpp/concurrent-programming/
+- https://www.studysmarter.co.uk/explanations/computer-science/computer-programming/concurrent-programming/
 - [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
 - [Introduction To Threads (pthreads) ](https://youtu.be/ldJ8WGZVXZk)
 - [Philosophers: The dinning problem](https://medium.com/@ridwaneelfilali/philosophers-the-dinning-problem-8ea3c0fc8cc7)
