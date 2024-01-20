@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:29 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/20 10:40:31 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:49:29 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,29 @@
 void is_eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mut[philo->id - 1]);
+	pthread_mutex_lock(&philo->protect);
 	printf(Y " Time %lld: philo Id : %d take a fork ...\n" RST, ft_get_time() - philo->time_start, philo->id);
+	pthread_mutex_unlock(&philo->protect);
 	if (philo->id == 1)
 	{
 		pthread_mutex_lock(&philo->mut[philo->nb_philo - 1]);
+		pthread_mutex_lock(&philo->protect);
 		printf(Y " Time %lld: philo Id : %d take a fork ...\n" RST, ft_get_time() - philo->time_start, philo->id );
+		pthread_mutex_unlock(&philo->protect);
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->mut[philo->id - 2]);
+		pthread_mutex_lock(&philo->protect);
 		printf(Y " Time %lld: philo Id : %d take a fork ...\n" RST, ft_get_time() - philo->time_start, philo->id);
+		pthread_mutex_unlock(&philo->protect);
 	}
+	pthread_mutex_lock(&philo->protect);
 	printf(G " Time %lld: philo Id : %d is eating ...\n" RST, ft_get_time() - philo->time_start, philo->id);
+	pthread_mutex_unlock(&philo->protect);
+	pthread_mutex_lock(&philo->protect);
 	philo->last_eat[philo->id - 1] = ft_get_time();
+	pthread_mutex_unlock(&philo->protect);
 	usleep(philo->time_to_eat * 1000);
 	return;
 }
@@ -39,9 +49,13 @@ void is_sleeping(t_philo *philo)
 		pthread_mutex_unlock(&philo->mut[philo->nb_philo - 1]);
 	else
 		pthread_mutex_unlock(&philo->mut[philo->id - 2]);
+	pthread_mutex_lock(&philo->protect);
 	printf(W " Time : %lld philo Id : %d is sleeping ...\n" RST, ft_get_time() - philo->time_start, philo->id);
+	pthread_mutex_unlock(&philo->protect);
 	usleep(philo->time_to_eat * 1000);
+	pthread_mutex_lock(&philo->protect);
 	printf(C "is thinking ...\n" RST);
+	pthread_mutex_unlock(&philo->protect);
 	return;
 }
 
@@ -83,19 +97,24 @@ void	*check_death(void *param)
 {
 	t_philo *death;
 	int i;
+	long long time;
 
 	death = (t_philo *)param;
 	i = 0;
-	usleep(1000);
+	sleep(1);
 	while (i < death->nb_philo)
 	{
-		if (ft_get_time() - death->last_eat[i] >= death->time_to_die)
+		pthread_mutex_lock(&death->protect);
+		time = ft_get_time() - death->last_eat[i];
+		// printf("%d    %lld\n", i+1, time);
+		pthread_mutex_unlock(&death->protect);
+		if (time >= death->time_to_die)
 		{
 			pthread_mutex_lock(&death->protect);
-			printf(R "is Dead %d\n" RST, i+1);
+			printf(R "is Dead %d    %lld\n" RST, i+1, time);
 			return (NULL);
 		}
-		if (i + 1 <= death->nb_philo)
+		if (i + 1 == death->nb_philo)
 			i = -1;
 		i++;
 	}
