@@ -511,7 +511,7 @@ When working with concurrent programming, you need to understand the basic princ
 - **Interprocess communication (IPC)**: In concurrent programming, processes may need to exchange data and signals. IPC mechanisms, such as pipes, file-based communication, shared memory, and message-passing systems, facilitate this data exchange between processes.
 - **Deadlocks and livelocks**: In some cases, processes or threads become trapped in a state of waiting for access to resources or for other processes or threads to complete, leading to deadlocks and livelocks. These situations can cause the concurrent program to hang or slow down, so it is essential to detect and handle them effectively.
 
-### the details of threads in computer programming:
+### The details of threads in computer programming:
 #### 1. Thread Definition:
 - **Definition**: A thread is the smallest unit of execution within a process. It represents an independent sequence of instructions that can be scheduled to run concurrently with other threads in the same process.
 - **Characteristics**: Threads within the same process share the same resources, such as memory space and file descriptors.
