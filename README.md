@@ -22,7 +22,7 @@ The issue arises when every philosopher picks up the fork on their left at the s
 ## The Setup
 
 <div align="center">
-<img width="600" alt="Screen Shot 2024-01-05 at 5 39 38 PM" src="https://github.com/zelhajou/Philosophers/assets/39954629/2baf18f2-2b9e-4091-b6f8-1a4f77363eff">
+<img width="600" alt="Screen Shot 2024-01-05 at 5 39 38 PM" src="https://github.com/zelhajou/42-Philosophers/assets/39954629/604ad98c-8adf-4fb0-a3d5-98923fc3ab35">
 </div>
 
 - **Five Philosophers:** They alternate between thinking and eating.
