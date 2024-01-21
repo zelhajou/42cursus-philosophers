@@ -9,7 +9,9 @@ This project simulates a classic problem in computer science, *the dining philos
 <!--
 ![MOSHED-2024-1-5-16-52-54](https://github.com/zelhajou/Philosophers/assets/39954629/d1660b4a-5adc-44e3-8177-0fffb4ef238a)
 -->
-![MOSHED-2024-1-5-16-56-57](https://github.com/zelhajou/Philosophers/assets/39954629/9b0f1688-34ab-4c6c-b60c-62ea236a0f95)
+<div align="center">
+<img width="600" alt="Screen Shot 2024-01-05 at 5 39 38 PM" src="https://github.com/zelhajou/Philosophers/assets/39954629/9b0f1688-34ab-4c6c-b60c-62ea236a0f95">
+</div>
 
 ## The Basic Setup
 Imagine five philosophers who spend their lives just thinking and eating. They sit around a round table with a bowl of spaghetti in front of each of them. Here’s the catch: there are only five forks available, placed between each pair of adjacent philosophers. To eat, a philosopher needs to use two forks – one on their left and one on their right.
@@ -18,7 +20,10 @@ Imagine five philosophers who spend their lives just thinking and eating. They s
 The issue arises when every philosopher picks up the fork on their left at the same time. Each of them is left waiting for the fork on their right to become available. Since everyone is holding one fork, no one has two forks to start eating. This results in a deadlock where all philosophers are stuck waiting indefinitely – a situation we want to avoid in real-world systems.
 
 ## The Setup
+
+<div align="center">
 <img width="600" alt="Screen Shot 2024-01-05 at 5 39 38 PM" src="https://github.com/zelhajou/Philosophers/assets/39954629/2baf18f2-2b9e-4091-b6f8-1a4f77363eff">
+</div>
 
 - **Five Philosophers:** They alternate between thinking and eating.
 - **Five Forks:** One between each philosopher.
