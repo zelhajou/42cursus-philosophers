@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/20 10:40:24 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:36:54 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_philo
 	int				nb_philo;
 	pthread_t		th_philo;
 	pthread_mutex_t	*mut;
-	pthread_mutex_t protect;
+	pthread_mutex_t *protect;
 	long long time_start;
 }		t_philo;
 
