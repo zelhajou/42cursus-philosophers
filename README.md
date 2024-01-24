@@ -16,13 +16,16 @@ This project simulates a classic problem in computer science, *the dining philos
 ## The Basic Setup
 Imagine five philosophers who spend their lives just thinking and eating. They sit around a round table with a bowl of spaghetti in front of each of them. Here’s the catch: there are only five forks available, placed between each pair of adjacent philosophers. To eat, a philosopher needs to use two forks – one on their left and one on their right.
 
-## The Problem
+## Understanding the Problem
 The issue arises when every philosopher picks up the fork on their left at the same time. Each of them is left waiting for the fork on their right to become available. Since everyone is holding one fork, no one has two forks to start eating. This results in a deadlock where all philosophers are stuck waiting indefinitely – a situation we want to avoid in real-world systems.
 
-## The Setup
+
+
+## The Scenario 
+Imagine a round table with several philosophers (threads) sitting around it. Each philosopher wants to eat (access a critical resource like a fork), but there are only a limited number of forks (resources) available.
 
 <div align="center">
-<img width="600" alt="Screen Shot 2024-01-05 at 5 39 38 PM" src="https://github.com/zelhajou/42-Philosophers/assets/39954629/604ad98c-8adf-4fb0-a3d5-98923fc3ab35">
+<img width="600" alt="Screen Shot 2024-01-05 at 5 39 38 PM" src="https://github.com/zelhajou/42-Philosophers/assets/39954629/ba9d0d13-ce07-4a27-b043-060bcf3cd0ae">  
 </div>
 
 - **Five Philosophers:** They alternate between thinking and eating.
@@ -30,39 +33,24 @@ The issue arises when every philosopher picks up the fork on their left at the s
 - **The Problem:** To eat, a philosopher needs both forks on either side.
 
 ## The Challenge
-The catch is simple yet complex. If every philosopher simultaneously picks up the left fork, they all wait for the right fork indefinitely – a deadlock. This situation perfectly mimics real-world scenarios in computing where processes wait indefinitely for resources, leading to system freezes.
+The catch is simple yet complex. If every philosopher simultaneously picks up the left fork, they all wait for the right fork indefinitely – a *deadlock*. This situation perfectly mimics real-world scenarios in computing where processes wait indefinitely for *resources*, leading to system freezes.
 
-<!--
-## Solving the Problem
-Several strategies have been proposed to solve this deadlock:
-
-1. **Semaphore Solution:** Limit the number of philosophers that can try to pick up forks simultaneously. If we allow only four philosophers to reach for the forks at any time, at least one philosopher will be able to eat, preventing a deadlock.
-2. **Designate a Left-Handed Philosopher:** If one philosopher picks up the right fork first and then the left, it breaks the cycle of everyone reaching for the left fork simultaneously, preventing a deadlock.
-3. **The Waiter Approach:** Introduce a waiter who decides when a philosopher can pick up forks. The waiter ensures that not all forks are picked up at once, preventing a deadlock.
-4. **Resource Hierarchy:** Number the forks and always have the philosophers pick up the lower-numbered fork first and the higher-numbered fork next. This order prevents the circular wait condition.
--->
 ## Why It Matters
-Understanding the Dining Philosophers problem is crucial in computer science because it teaches us about managing resources in multi-threaded or multi-process environments. It's not just about preventing deadlock but also ensuring fair access to resources and preventing starvation (where a process never gets the resources it needs).
+Understanding the Dining Philosophers' problem is crucial in computer science because it teaches us about managing resources in multi-threaded or multi-process environments. It's not just about preventing deadlock but also ensuring fair access to resources and preventing starvation (where a process never gets the resources it needs).
 
-## Conclusion
-The Dining Philosophers Problem is more than just a puzzle; it's a fundamental concept that helps in understanding complex scenarios in multi-threading and resource sharing in computing. By learning about this problem, one can gain insights into solving real-world issues in system design and process management.
-
-## How to Run
-Compile with `make` and run the program as follows:
-
-```bash
-./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_times_each_philosopher_must_eat (optional)]
-```
-## Implementation
+## Building the Philosophers
 The simulation is done using threads and mutexes. Each philosopher is a thread and forks are represented as mutexes.
+- **Define a philosopher thread**: Each philosopher should be a separate thread with its own loop. Each loop iteration should involve several activities:
+  - **Thinking**: Simulate thinking time using a sleep function.
+  - **Trying to eat**:
+    - Check if both its left and right forks are available.
+    - If both are available, acquire them (using mutexes or semaphores) and start eating.
+    - If not, wait for a while and try again later.
+  - **Eating**: Simulate eating time using a sleep function.
+  - **Releasing forks**: Release both forks once finished eating.
+  - **Sleeping**: Simulate a rest period before thinking again.
 
-## Features
-- Argument validation
-- Philosopher activities simulation
-- Resource management to avoid deadlocks
-
-## External functions
-
+## Mandatory External functions
 <details>
   <summary>
     <code>usleep()</code>
@@ -516,7 +504,7 @@ When working with concurrent programming, you need to understand the basic princ
 - **Interprocess communication (IPC)**: In concurrent programming, processes may need to exchange data and signals. IPC mechanisms, such as pipes, file-based communication, shared memory, and message-passing systems, facilitate this data exchange between processes.
 - **Deadlocks and livelocks**: In some cases, processes or threads become trapped in a state of waiting for access to resources or for other processes or threads to complete, leading to deadlocks and livelocks. These situations can cause the concurrent program to hang or slow down, so it is essential to detect and handle them effectively.
 
-### The details of threads in computer programming:
+### The Details of Threads in Computer Programming:
 #### 1. Thread Definition:
 - **Definition**: A thread is the smallest unit of execution within a process. It represents an independent sequence of instructions that can be scheduled to run concurrently with other threads in the same process.
 - **Characteristics**: Threads within the same process share the same resources, such as memory space and file descriptors.
@@ -552,7 +540,7 @@ int main() {
 
 - **Creation**: A thread is created using the `pthread_create` function or an equivalent function in other threading libraries.
 - **Running**: The thread starts executing its designated function.
-- **Termination**: The thread completes its execution or is explicitly terminated using `pthread_exit`.
+- **Termination**: The thread completes its execution or is explicitly terminated using.
 - **Joining**: The main thread or another thread may wait for a thread to finish using `pthread_join`.
 
 #### 5. Thread Synchronization:
@@ -603,6 +591,31 @@ When working with threads, several common issues and pitfalls should be aware of
     - **Problem**: Some threads may not get a chance to execute due to other threads monopolizing resources.
     - **Avoidance**: Implement fair resource allocation strategies, and be cautious with long-running or CPU-intensive tasks.
 
+## Conclusion
+The Dining Philosophers Problem is more than just a puzzle; it's a fundamental concept that helps in understanding complex scenarios in multi-threading and resource sharing in computing. By learning about this problem, one can gain insights into solving real-world issues in system design and process management.
+
+## How to Run
+Compile with `make` and run the program as follows:
+
+```bash
+./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_times_each_philosopher_must_eat (optional)]
+```
+
+## Features
+- Argument validation
+- Philosopher activities simulation
+- Resource management to avoid deadlocks
+
+## Useful Links
+- https://www.scaler.com/topics/cpp/concurrent-programming/
+- https://www.studysmarter.co.uk/explanations/computer-science/computer-programming/concurrent-programming/
+- [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
+- [Introduction To Threads (pthreads) ](https://youtu.be/ldJ8WGZVXZk)
+- [Philosophers: The dinning problem](https://medium.com/@ridwaneelfilali/philosophers-the-dinning-problem-8ea3c0fc8cc7)
+
+
+
+
 <!-- 
 Benefits of Using Threads:
 
@@ -634,12 +647,3 @@ Modularity: Tasks can be modularized and executed independently in separate thre
    - Threads provide a way to achieve scalability in applications by distributing work among multiple threads.
    - Scalability is important for handling increased workloads and taking advantage of modern, multi-core processors.
 -->
-
-
-## Useful Links
-- https://www.scaler.com/topics/cpp/concurrent-programming/
-- https://www.studysmarter.co.uk/explanations/computer-science/computer-programming/concurrent-programming/
-- [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
-- [Introduction To Threads (pthreads) ](https://youtu.be/ldJ8WGZVXZk)
-- [Philosophers: The dinning problem](https://medium.com/@ridwaneelfilali/philosophers-the-dinning-problem-8ea3c0fc8cc7)
-
