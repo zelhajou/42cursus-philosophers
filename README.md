@@ -18,6 +18,7 @@ Imagine five philosophers who spend their lives just thinking and eating. They s
 
 ## Understanding the Problem
 The issue arises when every philosopher picks up the fork on their left at the same time. Each of them is left waiting for the fork on their right to become available. Since everyone is holding one fork, no one has two forks to start eating. This results in a deadlock where all philosophers are stuck waiting indefinitely – a situation we want to avoid in real-world systems.
+- [DINING-PHILOSOPHERS PROBLEM: SIMPLIFIED](https://www.youtube.com/watch?v=VSkvwzqo-Pk&ab_channel=ZaynabZakiyah) 📹
 
 ## The Scenario 
 Imagine a round table with several philosophers (threads) sitting around it. Each philosopher wants to eat (access a critical resource like a fork), but there are only a limited number of forks (resources) available.
