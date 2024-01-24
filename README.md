@@ -19,8 +19,6 @@ Imagine five philosophers who spend their lives just thinking and eating. They s
 ## Understanding the Problem
 The issue arises when every philosopher picks up the fork on their left at the same time. Each of them is left waiting for the fork on their right to become available. Since everyone is holding one fork, no one has two forks to start eating. This results in a deadlock where all philosophers are stuck waiting indefinitely – a situation we want to avoid in real-world systems.
 
-
-
 ## The Scenario 
 Imagine a round table with several philosophers (threads) sitting around it. Each philosopher wants to eat (access a critical resource like a fork), but there are only a limited number of forks (resources) available.
 
@@ -50,7 +48,17 @@ The simulation is done using threads and mutexes. Each philosopher is a thread a
   - **Releasing forks**: Release both forks once finished eating.
   - **Sleeping**: Simulate a rest period before thinking again.
 
-## Mandatory External functions
+## Implementing Synchronization
+- **Mutexes**: This is a common approach. Each fork has a mutex associated with it. A philosopher can only acquire both fork mutexes if both are free, preventing another philosopher from grabbing a single fork and causing a deadlock.
+- **Semaphores**: You can use semaphores to limit the number of philosophers that can be eating at the same time, ensuring there are always enough forks available.
+
+## Logging and Testing:
+- Implement logging statements to track each philosopher's actions (thinking, eating, sleeping).
+- Test your program with different numbers of philosophers and ensure there are no deadlocks or starvation situations.
+
+
+## External functions
+**Mandatory Part**:
 <details>
   <summary>
     <code>usleep()</code>
@@ -486,6 +494,8 @@ int main() {
 ```
 </details>
 
+**Bonus part**:
+
 ## Explination
 
 The concept of threads is fundamental to concurrent programming, allowing multiple tasks to execute concurrently within a single process
@@ -563,33 +573,16 @@ void* thread_function(void* arg) {
 }
 ```
 
-### Common Pitfalls and Best Practices in Multithreaded Programming
+### Common Pitfalls in Multithreaded
 
 When working with threads, several common issues and pitfalls should be aware of and strive to avoid
 
-1. **Race Conditions**:
-    - **Problem**: Race conditions occur when two or more threads access shared data concurrently, leading to unpredictable behavior. It can result in data corruption or unexpected outcomes.
-    - **Avoidance**: Use synchronization mechanisms such as **mutexes**, **locks**, and **semaphores** to control access to shared resources. Ensure proper synchronization to prevent race conditions.
-
-2. **Deadlocks**:
-    - **Problem**: Deadlocks occur when two or more threads are blocked forever, each waiting for the other to release a resource.
-    - **Avoidance**: Carefully manage the order in which locks are acquired, and release locks in the reverse order. Implement deadlock detection mechanisms and design thread interactions to minimize the possibility of deadlocks.
-
-3. **Priority Inversion**:
-    - **Problem**: Priority inversion happens when a low-priority thread holds a resource needed by a high-priority thread, causing the high-priority thread to wait longer than expected.
-    - **Avoidance**: Use priority inheritance or priority ceiling protocols to mitigate priority inversion issues.
-  
-4. **Data Races**:
-    - **Problem**: Data races occur when multiple threads access and modify shared data without proper synchronization, leading to unpredictable results.
-    - **Avoidance**: Ensure that shared data is accessed in a thread-safe manner. Use synchronization mechanisms and atomic operations to prevent data races.4
-
-5. **Thread Leaks**:
-    - **Problem**: Thread leaks occur when threads are created but not properly terminated, leading to resource leaks and potential performance issues.
-    - **Avoidance**: Make sure to join or detach threads appropriately to release resources when they are no longer needed.
-
-6. **Thread Starvation**:
-    - **Problem**: Some threads may not get a chance to execute due to other threads monopolizing resources.
-    - **Avoidance**: Implement fair resource allocation strategies, and be cautious with long-running or CPU-intensive tasks.
+- **Race conditions**: Concurrent data access without sync leads to unpredictable behavior. (mutex, locks, semaphores)
+- **Deadlocks**: Threads stuck waiting for each other's resources, forever blocked. (lock order, deadlock detection)
+- **Priority inversion**: Low-pri thread delays high-pri by holding needed resource. (priority inheritance, ceiling)
+- **Data races**: Unprotected shared data access causing unpredictable results. (sync mechanisms, atomic operations)
+- **Thread leaks**: Unreleased threads wasting resources and hurting performance. (join/detach properly)
+- **Thread starvation**: Some threads never run due to others hogging resources. (fair allocation, avoid long tasks)
 
 ## Conclusion
 The Dining Philosophers Problem is more than just a puzzle; it's a fundamental concept that helps in understanding complex scenarios in multi-threading and resource sharing in computing. By learning about this problem, one can gain insights into solving real-world issues in system design and process management.
@@ -612,6 +605,7 @@ Compile with `make` and run the program as follows:
 - [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
 - [Introduction To Threads (pthreads) ](https://youtu.be/ldJ8WGZVXZk)
 - [Philosophers: The dinning problem](https://medium.com/@ridwaneelfilali/philosophers-the-dinning-problem-8ea3c0fc8cc7)
+- https://github.com/qingqingqingli/philosophers/wiki
 
 
 
