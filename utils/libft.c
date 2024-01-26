@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:49:19 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/26 16:09:26 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:16:15 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,13 @@ void ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(n / 10, fd);
 		ft_putnbr_fd(n % 10, fd);
 	}
+}
+
+void ft_usleep(long long time)
+{
+	long long start_time;
+
+	start_time = ft_get_time();
+	while (ft_get_time() - start_time < time)
+		usleep(100);
 }

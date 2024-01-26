@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:11:17 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/26 13:35:58 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:17:53 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	start_eating(t_philo *philo)
 	print_status(philo, "is eating");
 	philo->last_meal_time[philo->id - 1] = ft_get_time();
 	pthread_mutex_unlock(philo->protection_mutex);
-	usleep(philo->time_to_eat * 1000);
+	ft_usleep(philo->time_to_eat);
 }
 
 void	release_forks(t_philo *philo)

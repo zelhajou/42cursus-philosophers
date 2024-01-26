@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:29:06 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/26 14:11:38 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:17:46 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	*check_philosopher_health(void *param)
 
 	monitor = (t_philo *)param;
 	i = 0;
-	usleep(1000);
+	ft_usleep(10);
 	while (i < monitor->num_philosophers)
 	{
 		pthread_mutex_lock(monitor->protection_mutex);
