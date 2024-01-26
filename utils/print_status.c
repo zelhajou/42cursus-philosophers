@@ -6,36 +6,14 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:15:40 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/26 14:10:01 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:30:18 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void ft_putnbr_fd(int n, int fd)
-{
-	char c;
-
-	if (n < 0)
-	{
-		write(fd, "-", 1);
-		n = -n;
-	}
-	if (n >= 0 && n <= 9)
-	{
-		c = n + '0';
-		write(fd, &c, 1);
-	}
-	else
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
-	}
-}
-
 void	print_status(t_philo *philo, char *action)
 {
-
 	char	*color[6];
 
 	color[0] = RED;
