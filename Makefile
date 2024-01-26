@@ -6,7 +6,7 @@
 #    By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/04 22:57:41 by zelhajou          #+#    #+#              #
-#    Updated: 2024/01/19 22:46:18 by zelhajou         ###   ########.fr        #
+#    Updated: 2024/01/26 13:37:29 by zelhajou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME = philo
 CC = gcc
 CFLAGS = 
 OBJ_DIR = obj/
-SRC = src/main.c utils/libft.c utils/utils.c
+SRC = src/main.c utils/libft.c utils/parse_arguments.c \
+      src/philo_actions.c src/philo_states.c src/philo_threads.c \
+      src/simulation_init.c src/health_monitor.c utils/print_status.c
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 INCLUDES = -I include/
 
