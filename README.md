@@ -534,7 +534,6 @@ When working with concurrent programming, you need to understand the basic princ
   - Threads share memory, making communication and data sharing more efficient.
 
 #### 3. Creating Threads:
-Threads are typically created using threading libraries provided by the operating system or programming language.
 Example :
 
 ```c
