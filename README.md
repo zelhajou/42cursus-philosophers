@@ -14,9 +14,11 @@ This project simulates a classic problem in computer science, *the dining philos
 </div>
 
 ![MOSHED-2024-1-26-21-17-8](https://github.com/zelhajou/42-Philosophers/assets/39954629/741244de-ff8f-4d8e-a172-ea819bff1a91)
--->
-
 ![MOSHED-2024-1-26-21-4-22](https://github.com/zelhajou/42-Philosophers/assets/39954629/dd21e550-70ef-473f-abab-828f78b68b85)
+
+-->
+![MOSHED-2024-1-26-21-17-8](https://github.com/zelhajou/42-Philosophers/assets/39954629/78efd080-7891-44b8-80bc-e3fcfb64d8b3)
+
 
 ## The Basic Setup
 Imagine five philosophers who spend their lives just thinking and eating. They sit around a round table with a bowl of spaghetti in front of each of them. Here’s the catch: there are only five forks available, placed between each pair of adjacent philosophers. To eat, a philosopher needs to use two forks – one on their left and one on their right.
