@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:16:58 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/29 17:42:23 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:47:37 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void *philo_lifecycle(void *param)
 
 void	start_philosopher_threads(t_philo *philosophers)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < philosophers->num_philosophers)

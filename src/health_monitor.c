@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:29:06 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/26 18:17:46 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:47:50 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void link_philosophers_to_monitor(t_philo *philosophers, t_philo *monitor)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < monitor->num_philosophers)
