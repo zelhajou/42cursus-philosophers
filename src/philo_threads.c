@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:16:58 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/26 18:18:29 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:42:23 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,8 @@ void *philo_lifecycle(void *param)
 		ft_usleep(10);
 	while (1)
 	{
-		if (philo->id % 2)
-		{
-			get_right_fork(philo);
-			get_left_fork(philo);
-		}
-		else
-		{
-			get_left_fork(philo);
-			get_right_fork(philo);
-		}
+		get_right_fork(philo);
+		get_left_fork(philo);
 		start_eating(philo);
 		release_forks(philo);
 		start_sleeping(philo);

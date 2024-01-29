@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:15:40 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/26 16:30:18 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:43:28 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	print_status(t_philo *philo, char *action)
 	color[3] = BLUE;
 	color[4] = MAGENTA;
 	color[5] = CYAN;
-
-
+	
 	write(1, color[philo->id % 6], strlen(color[philo->id % 6]));
 	write(1, "[", 1);
 	ft_putnbr_fd(ft_get_time() - philo->start_time, 1);
