@@ -6,12 +6,12 @@
 #    By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/04 22:57:41 by zelhajou          #+#    #+#              #
-#    Updated: 2024/01/29 17:47:03 by zelhajou         ###   ########.fr        #
+#    Updated: 2024/01/29 17:53:38 by zelhajou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
 OBJ_DIR = obj/
 SRC = src/main.c utils/libft.c utils/parse_arguments.c \
