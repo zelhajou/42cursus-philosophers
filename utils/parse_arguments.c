@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:29:00 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/26 11:46:28 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:49:27 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ void	ft_error_parse_msg(void)
 
 bool	parse_arguments(int argc, char **argv, t_philo *philo)
 {
-	int	i;
-
-	i = 1;
 	if (argc < 5 || argc > 6)
 	{
 		ft_error_parse_msg();
