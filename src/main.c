@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:29 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/31 17:12:10 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:48:55 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	main(int argc, char **argv)
 	philosophers = initialize_simulation(argc, argv);
 	if (!philosophers)
 	{
+		write(2, RED, strlen(RED));
 		ft_putstr_fd("Simulation initialization failed.\n", 2);
+		write(2, RESET, strlen(RESET));
 		return (1);
 	}
 	health_monitor = setup_health_monitor(philosophers);

@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:29:00 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/31 17:30:04 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:48:38 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,21 @@
 
 void	ft_error_parse_msg(void)
 {
+	write(2, RED, strlen(RED));
 	ft_putstr_fd("Error: Invalid number of arguments\n", 2);
-	ft_putstr_fd("Usage:\n./philo [number_of_philosophers] [time_to_die] ", 2);
+	write(2, RESET, strlen(RESET));
+	write(2, "\n", 1);
+	write(2, GREEN, strlen(GREEN));
+	ft_putstr_fd("Usage: ./philo [number_of_philosophers] [time_to_die] ", 2);
 	ft_putstr_fd("[time_to_eat] [time_to_sleep] (optional)", 2);
-	ft_putstr_fd("[number_of_times_each_philosopher_must_eat]\n\n", 2);
-	ft_putstr_fd("Example:\n./philo 5 800 200 200 3\n", 2);
-	exit(1);
+	ft_putstr_fd("[number_of_times_each_philosopher_must_eat]\n", 2);
+	write(2, RESET, strlen(RESET));
+	write(2, "\n", 1);
+	write(2, YELLOW, strlen(YELLOW));
+	ft_putstr_fd("Example: ./philo 5 800 200 200 3\n", 2);
+	write(2, RESET, strlen(RESET));
+	write(2, "\n", 1);
+	write(2, RESET, strlen(RESET));
 }
 
 bool	parse_arguments(int argc, char **argv, t_philo *philos)
