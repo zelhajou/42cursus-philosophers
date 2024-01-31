@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_states.c                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 16:40:58 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/31 17:11:21 by zelhajou         ###   ########.fr       */
+/*   Created: 2024/01/31 16:47:23 by zelhajou          #+#    #+#             */
+/*   Updated: 2024/01/31 16:47:44 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	start_sleeping(t_philo *philosopher)
+void	ft_sleep(long long time)
 {
-	pthread_mutex_lock(philosopher->protection_mutex);
-	print_status(philosopher, "is sleeping");
-	pthread_mutex_unlock(philosopher->protection_mutex);
-	ft_sleep(philosopher->time_to_eat);
-}
+	long long	start_time;
 
-void	start_thinking(t_philo *philosopher)
-{
-	pthread_mutex_lock(philosopher->protection_mutex);
-	print_status(philosopher, "is thinking");
-	pthread_mutex_unlock(philosopher->protection_mutex);
+	start_time = ft_get_time();
+	while (ft_get_time() - start_time < time)
+		usleep(100);
 }

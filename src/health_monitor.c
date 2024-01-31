@@ -6,16 +6,37 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:29:06 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/29 17:47:50 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:27:34 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-
-void link_philosophers_to_monitor(t_philo *philosophers, t_philo *monitor)
+t_philo	*setup_health_monitor(t_philo *philosopher)
 {
-	int i;
+	t_philo	*monitor;
+
+	monitor = malloc(sizeof(t_philo));
+	if (!monitor)
+		return (NULL);
+	monitor->id = 0;
+	monitor->meals_eaten = 0;
+	monitor->time_to_die = philosopher->time_to_die;
+	monitor->time_to_eat = philosopher->time_to_eat;
+	monitor->time_to_sleep = philosopher->time_to_sleep;
+	monitor->num_must_eat = philosopher->num_must_eat;
+	monitor->last_meal_time = philosopher->last_meal_time;
+	monitor->num_forks = philosopher->num_philosophers;
+	monitor->num_philosophers = philosopher->num_philosophers;
+	monitor->fork_mutex = NULL;
+	monitor->protection_mutex = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(monitor->protection_mutex, NULL);
+	return (monitor);
+}
+
+void	link_philosophers_to_monitor(t_philo *philosophers, t_philo *monitor)
+{
+	int	i;
 
 	i = 0;
 	while (i < monitor->num_philosophers)
@@ -26,37 +47,15 @@ void link_philosophers_to_monitor(t_philo *philosophers, t_philo *monitor)
 	monitor->start_time = ft_get_time();
 }
 
-t_philo *setup_health_monitor(t_philo *philo)
+void	*check_philosopher_health(void *philosopher)
 {
-	t_philo *monitor;
+	t_philo		*monitor;
+	int			i;
+	long long	time;
 
-	monitor = malloc(sizeof(t_philo));
-	if (!monitor)
-		return (NULL);
-	monitor->id = 0;
-	monitor->meals_eaten = 0;
-	monitor->time_to_die = philo->time_to_die;
-	monitor->time_to_eat = philo->time_to_eat;
-	monitor->time_to_sleep = philo->time_to_sleep;
-	monitor->num_must_eat = philo->num_must_eat;
-	monitor->last_meal_time = philo->last_meal_time;
-	monitor->num_forks = philo->num_philosophers;
-	monitor->num_philosophers = philo->num_philosophers;
-	monitor->fork_mutex = NULL;
-	monitor->protection_mutex = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(monitor->protection_mutex, NULL);
-	return (monitor);
-}
-
-void	*check_philosopher_health(void *param)
-{
-	t_philo *monitor;
-	int i;
-	long long time;
-
-	monitor = (t_philo *)param;
+	monitor = (t_philo *)philosopher;
 	i = 0;
-	ft_usleep(10);
+	ft_sleep(10);
 	while (i < monitor->num_philosophers)
 	{
 		pthread_mutex_lock(monitor->protection_mutex);
@@ -65,8 +64,7 @@ void	*check_philosopher_health(void *param)
 		if (time >= monitor->time_to_die)
 		{
 			pthread_mutex_lock(monitor->protection_mutex);
-			//print_status(&monitor[i], "has Died");
-			printf("has Died %d    %lld\n", i+1, time);
+			rest_in_peace(i + 1, time);
 			return (NULL);
 		}
 		if (i + 1 == monitor->num_philosophers)

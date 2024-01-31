@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:29:00 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/29 17:49:27 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:30:04 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,24 @@ void	ft_error_parse_msg(void)
 	exit(1);
 }
 
-bool	parse_arguments(int argc, char **argv, t_philo *philo)
+bool	parse_arguments(int argc, char **argv, t_philo *philos)
 {
 	if (argc < 5 || argc > 6)
 	{
 		ft_error_parse_msg();
 		return (false);
 	}
-	philo->num_philosophers = ft_atoi(argv[1]);
-	philo->time_to_die = ft_atoi(argv[2]);
-	philo->time_to_eat = ft_atoi(argv[3]);
-	philo->time_to_sleep = ft_atoi(argv[4]);
+	philos->num_philosophers = ft_atoi(argv[1]);
+	philos->time_to_die = ft_atoi(argv[2]);
+	philos->time_to_eat = ft_atoi(argv[3]);
+	philos->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		philo->num_must_eat = ft_atoi(argv[5]);
+		philos->num_must_eat = ft_atoi(argv[5]);
 	else
-		philo->num_must_eat = -1;
-	if (philo->num_philosophers <= 0 || philo->time_to_die <= 0
-		|| philo->time_to_eat <= 0 || philo->time_to_sleep <= 0
-		|| (argc == 6 && philo->num_must_eat <= 0))
+		philos->num_must_eat = -1;
+	if (philos->num_philosophers <= 0 || philos->time_to_die <= 0
+		|| philos->time_to_eat <= 0 || philos->time_to_sleep <= 0
+		|| (argc == 6 && philos->num_must_eat <= 0))
 	{
 		ft_putstr_fd("Error: Invalid arguments\n", 2);
 		return (false);

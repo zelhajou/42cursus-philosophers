@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/26 18:17:01 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:29:30 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define CYAN			"\033[36m"
 # define WHITE			"\033[37m"
 
-
 typedef struct s_philo
 {
 	int				id;
@@ -47,47 +46,42 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	*protection_mutex;
 	long long		start_time;
-} t_philo;
+}	t_philo;
 
 // philo_actions
-void			get_left_fork(t_philo *philo);
-void			get_right_fork(t_philo *philo);
-void			start_eating(t_philo *philo);
-void			release_forks(t_philo *philo);
-
+void			get_fork(t_philo *philosopher);
+void			start_eating(t_philo *philosopher);
+void			release_forks(t_philo *philosopher);
 // philo_states
-void			start_sleeping(t_philo *philo);
-void			start_thinking(t_philo *philo);
-
+void			start_sleeping(t_philo *philosopher);
+void			start_thinking(t_philo *philosopher);
 // philo_threads
-void			*philo_lifecycle(void *param);
+void			*philo_lifecycle(void *philosopher);
 void			start_philosopher_threads(t_philo *philosophers);
-
 // simulation_init
 pthread_mutex_t	*initialize_forks(int num_philosophers);
 long long		*initialize_last_meal_time(int num_philosophers);
-void			initialize_philosopher_data(t_philo *philosophers_initialized, t_philo *philo, pthread_mutex_t *num_forks, long long *last_meal_time);
+void			initialize_philos_data(t_philo *philosophers_initialized,
+					t_philo *philo, pthread_mutex_t *num_forks,
+					long long *last_meal_time);
 t_philo			*initialize_philosophers(t_philo *philosophers);
 t_philo			*initialize_simulation(int argc, char **argv);
-
 // health_monitor
-t_philo			*setup_health_monitor(t_philo *philo);
-void			*check_philosopher_health(void *param);
-void			link_philosophers_to_monitor(t_philo *philosophers, t_philo *monitor);
-
+t_philo			*setup_health_monitor(t_philo *philosopher);
+void			*check_philosopher_health(void *philosopher);
+void			link_philosophers_to_monitor(t_philo *philosophers,
+					t_philo *monitor);
 // parse_arguments
-bool			parse_arguments(int argc, char **argv, t_philo *philo);
-
+bool			parse_arguments(int argc, char **argv, t_philo *philos);
 // print_prompt
 void			ft_putnbr_fd(int n, int fd);
 void			print_status(t_philo *philo, char *action);
-
+void			rest_in_peace(int id, long long time);
 // utils
 void			ft_putstr_fd(char *s, int fd);
-bool			ft_is_digit(char c);
 int				skip_space(int *i, const char *str);
 int				ft_atoi(const char *str);
 long long		ft_get_time(void);
 void			ft_error_parse_msg(void);
-void			ft_usleep(long long time);
+void			ft_sleep(long long time);
 #endif
