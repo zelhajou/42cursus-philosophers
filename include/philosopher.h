@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/31 17:29:30 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:09:04 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 typedef struct s_philo
 {
 	int				id;
-	int				meals_eaten;
+	int				*meals_eaten;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;

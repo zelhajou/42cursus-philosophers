@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:13:48 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/31 17:24:59 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:51:48 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,17 @@ void	initialize_philos_data(t_philo *philosophers_initialized,
 		long long *last_meal_time)
 {
 	int	i;
+	int	*meals;
 
+	meals = malloc(sizeof(int) * philo->num_philosophers);
+	if (!meals)
+		return ;
+	memset(meals, 0, sizeof(int) * philo->num_philosophers);
 	i = 0;
 	while (i < philo->num_philosophers)
 	{
 		philosophers_initialized[i].id = i + 1;
-		philosophers_initialized[i].meals_eaten = 0;
+		philosophers_initialized[i].meals_eaten = meals;
 		philosophers_initialized[i].time_to_die = philo->time_to_die;
 		philosophers_initialized[i].time_to_eat = philo->time_to_eat;
 		philosophers_initialized[i].time_to_sleep = philo->time_to_sleep;
