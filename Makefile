@@ -6,13 +6,13 @@
 #    By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/04 22:57:41 by zelhajou          #+#    #+#              #
-#    Updated: 2024/02/01 20:53:38 by zelhajou         ###   ########.fr        #
+#    Updated: 2024/02/01 21:26:26 by zelhajou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread -g# -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread 
 OBJ_DIR = obj/
 SRC = src/main.c utils/libft.c utils/parse_arguments.c \
       src/philo_actions.c src/philo_states.c src/philo_threads.c \
