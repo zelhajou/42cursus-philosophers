@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:29 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/01 19:58:31 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:08:07 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void clean_garbage(t_philo *philosophers, t_philo *health_monitor)
 		i++;
 	}
 	pthread_mutex_destroy(health_monitor->protection_mutex);
+	free(philosophers->fork_mutex);
+	free(philosophers->meals_eaten);
+	free(philosophers->last_meal_time);
+	free(philosophers->protection_mutex);
+	free(philosophers);
+	philosophers = NULL;
 	// philosophers->fork_mutex = NULL;
 	// philosophers->protection_mutex = NULL;
 	// health_monitor->protection_mutex = NULL;

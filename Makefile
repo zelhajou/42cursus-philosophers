@@ -6,13 +6,13 @@
 #    By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/04 22:57:41 by zelhajou          #+#    #+#              #
-#    Updated: 2024/01/31 16:48:38 by zelhajou         ###   ########.fr        #
+#    Updated: 2024/02/01 19:10:21 by zelhajou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread -g
 OBJ_DIR = obj/
 SRC = src/main.c utils/libft.c utils/parse_arguments.c \
       src/philo_actions.c src/philo_states.c src/philo_threads.c \
@@ -31,7 +31,7 @@ $(OBJ_DIR)%.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJ_DIR)*/*.o
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
