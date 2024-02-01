@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:29:06 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/01 17:13:35 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:38:13 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ bool	check_meals_eaten(t_philo *monitor)
 		return (true);
 	while (i < monitor->num_philosophers)
 	{
+		pthread_mutex_lock(monitor->protection_mutex);
 		if (monitor->meals_eaten[i] < monitor->num_must_eat)
-			return (true);
+			return (pthread_mutex_unlock(monitor->protection_mutex), true);
+		pthread_mutex_unlock(monitor->protection_mutex);
 		i++;
 	}
 	pthread_mutex_lock(monitor->protection_mutex);
