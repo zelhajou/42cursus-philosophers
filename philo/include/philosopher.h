@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/01 21:16:10 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:51:44 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int				ft_atoi(const char *str);
 long long		ft_get_time(void);
 void			ft_error_parse_msg(void);
 void			ft_sleep(long long time);
-size_t ft_strlen(char *str);
+size_t			ft_strlen(char *str);
 
 #endif

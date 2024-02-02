@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:29 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/01 20:56:02 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:59:22 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	link_philosophers_to_monitor(philosophers, health_monitor);
-	// printf("Time\tindex\taction\n");
 	start_philosopher_threads(philosophers);
 	pthread_create(&health_monitor->philo_thread, NULL,
-		check_philosopher_health, health_monitor);
+	check_philosopher_health, health_monitor);
 	pthread_join(health_monitor->philo_thread, NULL);
-	clean_garbage(philosophers, health_monitor);
-	return (0);
+	return (clean_garbage(philosophers, health_monitor), 0);
 }
