@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:13:48 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/02 12:20:30 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:14:37 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,39 @@
 
 t_philo	*initialize_simulation(int argc, char **argv)
 {
-	t_philo	*philosophers;
+	t_philo	*philo_info;
 	t_philo	*philosophers_initialized;
 
-	philosophers = malloc(sizeof(t_philo));
-	if (!philosophers)
+	philo_info = malloc(sizeof(t_philo));
+	if (!philo_info)
 		return (NULL);
-	if (!parse_arguments(argc, argv, philosophers))
+	if (!parse_arguments(argc, argv, philo_info))
 	{
-		free(philosophers);
+		free(philo_info);
 		return (NULL);
 	}
-	philosophers_initialized = initialize_philosophers(philosophers);
+	philosophers_initialized = initialize_philosophers(philo_info);
 	if (!philosophers_initialized)
 	{
-		free(philosophers);
+		free(philo_info);
 		return (NULL);
 	}
 	return (philosophers_initialized);
 }
 
-t_philo	*initialize_philosophers(t_philo *philosophers)
+t_philo	*initialize_philosophers(t_philo *philo_info)
 {
 	t_philo			*philos_initialized;
 	pthread_mutex_t	*forks;
 	long long		*last_meal_time;
 
 	philos_initialized = malloc(sizeof(t_philo)
-			* philosophers->num_philosophers);
+			* philo_info->num_philosophers);
 	if (!philos_initialized)
 		return (NULL);
-	forks = initialize_forks(philosophers->num_philosophers);
-	last_meal_time = initialize_last_meal_time(philosophers->num_philosophers);
-	initialize_philos_data(philos_initialized, philosophers,
+	forks = initialize_forks(philo_info->num_philosophers);
+	last_meal_time = initialize_last_meal_time(philo_info->num_philosophers);
+	initialize_philos_data(philos_initialized, philo_info,
 		forks, last_meal_time);
 	return (philos_initialized);
 }

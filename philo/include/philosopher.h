@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/02 13:26:15 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:14:55 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ long long		*initialize_last_meal_time(int num_philosophers);
 void			initialize_philos_data(t_philo *philosophers_initialized,
 					t_philo *philo, pthread_mutex_t *num_forks,
 					long long *last_meal_time);
-t_philo			*initialize_philosophers(t_philo *philosophers);
+t_philo			*initialize_philosophers(t_philo *philo_info);
 t_philo			*initialize_simulation(int argc, char **argv);
 // health_monitor
 t_philo			*setup_health_monitor(t_philo *philosopher);
@@ -72,7 +72,7 @@ void			*check_philosopher_health(void *philosopher);
 void			link_philosophers_to_monitor(t_philo *philosophers,
 					t_philo *monitor);
 // parse and validate argus
-bool			parse_arguments(int argc, char **argv, t_philo *philos);
+bool			parse_arguments(int argc, char **argv, t_philo *philo_info);
 bool 			validate_num_philosophers(const char *arg);
 bool 			validate_time_argument(const char *arg);
 bool 			validate_num_must_eat(const char *arg);
