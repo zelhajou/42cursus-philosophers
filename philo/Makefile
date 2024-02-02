@@ -6,7 +6,7 @@
 #    By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/04 22:57:41 by zelhajou          #+#    #+#              #
-#    Updated: 2024/02/01 21:26:26 by zelhajou         ###   ########.fr        #
+#    Updated: 2024/02/02 13:23:11 by zelhajou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread 
 OBJ_DIR = obj/
-SRC = src/main.c utils/libft.c utils/parse_arguments.c \
+SRC = src/main.c utils/libft.c utils/parse_args.c \
       src/philo_actions.c src/philo_states.c src/philo_threads.c \
       src/simulation_init.c src/health_monitor.c utils/print_status.c \
-	  utils/utils.c
+	  utils/utils.c utils/validate_args.c
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 INCLUDES = -I include/
 

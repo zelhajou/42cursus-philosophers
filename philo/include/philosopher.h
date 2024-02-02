@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/02 11:51:44 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:26:15 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,25 @@ t_philo			*setup_health_monitor(t_philo *philosopher);
 void			*check_philosopher_health(void *philosopher);
 void			link_philosophers_to_monitor(t_philo *philosophers,
 					t_philo *monitor);
-// parse_arguments
+// parse and validate argus
 bool			parse_arguments(int argc, char **argv, t_philo *philos);
+bool 			validate_num_philosophers(const char *arg);
+bool 			validate_time_argument(const char *arg);
+bool 			validate_num_must_eat(const char *arg);
+
 // print_prompt
-void			ft_putnbr_fd(int n, int fd);
+void ft_putnbr_fd(int n, int fd);
 void			print_status(t_philo *philo, char *action);
 void			rest_in_peace(int id, long long time);
+void			ft_error_parse_msg(void);
 // utils
 void			ft_putstr_fd(char *s, int fd);
-int				skip_space(int *i, const char *str);
 int				ft_atoi(const char *str);
 long long		ft_get_time(void);
-void			ft_error_parse_msg(void);
 void			ft_sleep(long long time);
 size_t			ft_strlen(char *str);
+bool			ft_is_numeric(const char *str);
+int				ft_isdigit(int c);
+void			clean_garbage(t_philo *philosophers, t_philo *health_monitor);
 
 #endif

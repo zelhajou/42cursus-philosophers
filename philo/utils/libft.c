@@ -6,11 +6,21 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:49:19 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/01/31 16:47:36 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:52:53 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+size_t	ft_strlen(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -63,14 +73,6 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (sign * res);
-}
-
-long long	ft_get_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 void	ft_putnbr_fd(int n, int fd)
