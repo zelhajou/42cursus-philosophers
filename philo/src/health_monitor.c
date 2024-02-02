@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:29:06 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/01 19:38:13 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:16:08 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	*check_philosopher_health(void *philosopher)
 
 	monitor = (t_philo *)philosopher;
 	i = 0;
-	ft_sleep(10);
+	// ft_sleep(10);
 	while (i < monitor->num_philosophers && check_meals_eaten(monitor))
 	{
 		pthread_mutex_lock(monitor->protection_mutex);
@@ -83,7 +83,7 @@ void	*check_philosopher_health(void *philosopher)
 		if (time >= monitor->time_to_die)
 		{
 			pthread_mutex_lock(monitor->protection_mutex);
-			rest_in_peace(i + 1, time);
+			rest_in_peace(i + 1, ft_get_time() - monitor->start_time);
 			return (NULL);
 		}
 		if (i + 1 == monitor->num_philosophers)
