@@ -6,7 +6,7 @@
 #    By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/04 22:57:41 by zelhajou          #+#    #+#              #
-#    Updated: 2024/02/02 15:42:24 by zelhajou         ###   ########.fr        #
+#    Updated: 2024/02/02 15:45:57 by zelhajou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c include/philosopher.h
-	@mkdir -p $(@D)
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
