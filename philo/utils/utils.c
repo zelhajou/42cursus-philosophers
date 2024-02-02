@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:47:23 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/02 13:12:19 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:15:09 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_sleep(long long time)
 		usleep(100);
 }
 
-void clean_garbage(t_philo *philosophers, t_philo *health_monitor)
+void	clean_garbage(t_philo *philosophers, t_philo *health_monitor)
 {
 	int	i;
 

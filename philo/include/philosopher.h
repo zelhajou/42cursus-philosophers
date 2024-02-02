@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:06:37 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/02 19:14:55 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:55:10 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void			link_philosophers_to_monitor(t_philo *philosophers,
 					t_philo *monitor);
 // parse and validate argus
 bool			parse_arguments(int argc, char **argv, t_philo *philo_info);
-bool 			validate_num_philosophers(const char *arg);
-bool 			validate_time_argument(const char *arg);
-bool 			validate_num_must_eat(const char *arg);
+bool			validate_num_philosophers(const char *arg);
+bool			validate_time_argument(const char *arg);
+bool			validate_num_must_eat(const char *arg);
 
 // print_prompt
-void ft_putnbr_fd(int n, int fd);
+void			ft_putnbr_fd(int n, int fd);
 void			print_status(t_philo *philo, char *action);
 void			rest_in_peace(int id, long long time);
 void			ft_error_parse_msg(void);

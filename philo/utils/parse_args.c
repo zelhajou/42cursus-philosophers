@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:29:00 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/02 19:13:49 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:54:01 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,26 @@ void	ft_error_parse_msg(void)
 
 bool	parse_arguments(int argc, char **argv, t_philo *philo_info)
 {
-    if (argc < 5 || argc > 6)
-    {
-        ft_error_parse_msg();
-        return false;
-    }
-    if (!validate_num_philosophers(argv[1]) ||
-        !validate_time_argument(argv[2]) ||
-        !validate_time_argument(argv[3]) ||
-        !validate_time_argument(argv[4]) ||
-        (argc == 6 && !validate_num_must_eat(argv[5])))
-    {
-        return (false);
-    }
-    philo_info->num_philosophers = ft_atoi(argv[1]);
-    philo_info->time_to_die = ft_atoi(argv[2]);
-    philo_info->time_to_eat = ft_atoi(argv[3]);
-    philo_info->time_to_sleep = ft_atoi(argv[4]);
-    if (argc == 6)
-        philo_info->num_must_eat = ft_atoi(argv[5]);
-    else
-        philo_info->num_must_eat = -1;
-
-    return (true);
+	if (argc < 5 || argc > 6)
+	{
+		ft_error_parse_msg();
+		return (false);
+	}
+	if (!validate_num_philosophers(argv[1])
+		|| !validate_time_argument(argv[2])
+		|| !validate_time_argument(argv[3])
+		|| !validate_time_argument(argv[4])
+		|| (argc == 6 && !validate_num_must_eat(argv[5])))
+	{
+		return (false);
+	}
+	philo_info->num_philosophers = ft_atoi(argv[1]);
+	philo_info->time_to_die = ft_atoi(argv[2]);
+	philo_info->time_to_eat = ft_atoi(argv[3]);
+	philo_info->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		philo_info->num_must_eat = ft_atoi(argv[5]);
+	else
+		philo_info->num_must_eat = -1;
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: zelhajou <zelhajou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:29 by zelhajou          #+#    #+#             */
-/*   Updated: 2024/02/02 12:50:50 by zelhajou         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:54:32 by zelhajou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	health_monitor = setup_health_monitor(philosophers);
-	if(!health_monitor)
+	if (!health_monitor)
 	{
 		write(2, RED, ft_strlen(RED));
 		ft_putstr_fd("Health monitor initialization failed.\n", 2);
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	link_philosophers_to_monitor(philosophers, health_monitor);
 	start_philosopher_threads(philosophers);
 	pthread_create(&health_monitor->philo_thread, NULL,
-	check_philosopher_health, health_monitor);
+		check_philosopher_health, health_monitor);
 	pthread_join(health_monitor->philo_thread, NULL);
 	return (clean_garbage(philosophers, health_monitor), 0);
 }
