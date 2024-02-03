@@ -504,7 +504,7 @@ int main() {
 
 **Bonus part**:
 
-## Explination
+## Explanation
 
 The concept of threads is fundamental to concurrent programming, allowing multiple tasks to execute concurrently within a single process
 
