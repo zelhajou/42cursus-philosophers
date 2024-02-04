@@ -610,7 +610,7 @@ Compile with `make` and run the program as follows:
 - https://www.scaler.com/topics/cpp/concurrent-programming/
 - https://www.studysmarter.co.uk/explanations/computer-science/computer-programming/concurrent-programming/
 - [Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
-- (Multithreaded Programming with ThreadMentor)[https://pages.mtu.edu/~shene/NSF-3/e-Book/index.html]
+- [Multithreaded Programming with ThreadMentor](https://pages.mtu.edu/~shene/NSF-3/e-Book/index.html)
 - [Introduction To Threads (pthreads) ](https://youtu.be/ldJ8WGZVXZk)
 - [Philosophers: The dinning problem](https://medium.com/@ridwaneelfilali/philosophers-the-dinning-problem-8ea3c0fc8cc7)
 - https://github.com/qingqingqingli/philosophers/wiki
