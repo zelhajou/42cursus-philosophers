@@ -59,7 +59,9 @@ The simulation is done using threads and mutexes. Each philosopher is a thread a
 ## Implementing Synchronization
 - **Mutexes**: This is a common approach. Each fork has a mutex associated with it. A philosopher can only acquire both fork mutexes if both are free, preventing another philosopher from grabbing a single fork and causing a deadlock.
 - **Semaphores**: You can use semaphores to limit the number of philosophers that can be eating at the same time, ensuring there are always enough forks available.
-
+  - [What is the difference between lock, mutex and semaphore?](https://stackoverflow.com/questions/2332765/what-is-the-difference-between-lock-mutex-and-semaphore)
+  - [What is a Semaphore](https://stackoverflow.com/questions/34519/what-is-a-semaphore/40238#40238)
+  - [Mutex vs Semaphore](https://www.geeksforgeeks.org/mutex-vs-semaphore/)
 ## Logging and Testing:
 - Implement logging statements to track each philosopher's actions (thinking, eating, sleeping).
 - Test your program with different numbers of philosophers and ensure there are no deadlocks or starvation situations.
