@@ -504,7 +504,6 @@ int main() {
 ```
 </details>
 
-**Bonus part**:
 
 ## Explanation
 
@@ -535,6 +534,7 @@ When working with concurrent programming, you need to understand the basic princ
 - **Characteristics**: Threads within the same process share the same resources, such as memory space and file descriptors.
 
 #### 2. Process vs. Thread:
+Processes and threads are the basic building blocks of a computer program. They are the smallest units of execution in a program. A process is an instance of a program that is being executed. A thread is a sequence of instructions within a process that can be executed independently of other code.
 - **Process**:
   - An independent program in execution with its own memory space.
   - Processes do not share memory, necessitating inter-process communication mechanisms.
