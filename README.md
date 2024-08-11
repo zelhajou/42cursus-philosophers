@@ -541,6 +541,10 @@ Processes and threads are the basic building blocks of a computer program. They 
 - **Thread**:
   - A lightweight, independent unit of a process with shared resources.
   - Threads share memory, making communication and data sharing more efficient.
+  
+  ![processes](https://github.com/user-attachments/assets/08007d6f-6bbb-4443-b971-0944ac1c0650)
+  ![threads](https://github.com/user-attachments/assets/b0c2adb5-4b58-4541-9c4c-34e2960b7f38)
+
 
 [Whats the difference between Process and a Thread?](https://www.quora.com/What-is-the-difference-between-a-process-and-a-thread)
 
@@ -572,6 +576,10 @@ int main() {
 #### 5. Thread Synchronization:
 - Threads may need to synchronize their execution to avoid **race conditions** and **conflicts**.
 - Synchronization mechanisms include **mutexes**, **semaphores**, and **condition variables**.
+
+![mutexes](https://github.com/user-attachments/assets/f21ad45c-be9f-4629-8429-51edfdae133b)
+
+
 Example :
 
 ```c
