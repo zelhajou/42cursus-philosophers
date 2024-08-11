@@ -518,6 +518,8 @@ When working with concurrent programming, you need to understand the basic princ
 - **Non-determinism**: Due to the unpredictable order of execution, concurrent programs can give different results on different runs, making debugging and testing more complex. Non-determinism arises from the uncertain order in which threads or processes access shared resources and interact with each other.
 - **Synchronization**: Concurrent programs use synchronization mechanisms to coordinate access to shared resources and ensure mutually exclusive access or resource protection to prevent data inconsistency and race conditions.
 
+![ipc](https://github.com/user-attachments/assets/db55885b-ead1-4e71-8d62-c42499354030)
+
 ### Concurrency Meaning in Programming: A Detailed Overview
 - **Processes and threads**: Concurrency is achieved by running multiple tasks in parallel, either as processes or threads. Processes are independent units of execution with their own memory space, while threads belong to a single process and share memory with other threads in that process.
 - **Interprocess communication (IPC)**: In concurrent programming, processes may need to exchange data and signals. IPC mechanisms, such as pipes, file-based communication, shared memory, and message-passing systems, facilitate this data exchange between processes.
