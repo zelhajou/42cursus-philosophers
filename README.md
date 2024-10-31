@@ -635,6 +635,10 @@ Compile with `make` and run the program as follows:
 - [Philosophers: The dinning problem](https://medium.com/@ridwaneelfilali/philosophers-the-dinning-problem-8ea3c0fc8cc7)
 - https://github.com/qingqingqingli/philosophers/wiki
 
+# Concept Drawings and Notes
+|![IMG_5719](https://github.com/user-attachments/assets/6cf197e0-fe97-4a62-bbb6-3ec436da970e) | ![IMG_5721](https://github.com/user-attachments/assets/a2027637-b563-4250-85b1-740a31f45c91) |![IMG_5722](https://github.com/user-attachments/assets/9ef91947-87ba-454d-a77e-254ab8a6e5bd) |
+|-|-|-|
+| ![IMG_5723](https://github.com/user-attachments/assets/f6e406c0-2d43-41ae-b483-92a3cc638973) | ![IMG_5724](https://github.com/user-attachments/assets/8d228862-1a7b-467f-b4c2-bb19702df88e) |![IMG_5725](https://github.com/user-attachments/assets/794ad190-c616-4eaa-a1aa-a30f62cb0113) |
 
 
 
